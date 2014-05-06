@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Card Game</title>
+    <script>
+        // Card game
+        // Card constructor
+        var suitDescrption = ['Hearts', 'Spades', 'Clubs', 'Diamonds'];
+        var valDescription = ['Ace', 2,3,4,5,6,7,8,9,10,'Jack', 'Queen', 'King'];
+
+        function Card(_suit, _value){
+            this.suit = _suit;
+            this.val = _value;
+            this.toString = function(){
+                return valDescription[this.val] + ' of ' + suitDescrption[this.suit];
+            }
+        }
+
+        function Deck(){
+            this.cards = [];
+            this.shuffle = function(){
+                for(var i = 0, len = this.cards.length; i < len; i++){
+                    var index = Math.floor(Math.random() * len);
+                    var temp = this.cards[i];
+                    this.cards[i] = this.cards[index];
+                    this.cards[index] = temp;
+                }
+            };
+            this.deal = function(){
+
+            };
+            this.toString = function(){
+                //console.log(this.cards);
+                return this.cards.map(function(elem){
+
+                    return elem.toString();
+                });
+            };
+            this.init = function(){
+                this.cards = [];
+                for (var i = 0; i < 4; i++){
+                    for (var j = 0; j < 13; j++){
+                        var card = new Card(i, j);
+                        this.cards.push(card);
+                    }
+                }
+            }
+        }
+
+        var deck = new Deck();
+        console.log(deck.cards.length);
+        deck.init();
+        console.log(deck.toString());
+        deck.shuffle();
+        console.log(deck.toString());
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
