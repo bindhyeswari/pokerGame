@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        input{
+            font: 100 1em Avenir;
+            padding: 0.2em 0.5em;
+            margin: 1em;
+            border:1px solid gray ;
+        }
+    </style>
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/modernizr/modernizr.js"></script>
+    <script>
+        // check if local storage is available
+        $(function(){
+            $('#btn').click(function(){
+                localStorage.setItem('name', $('#name').val());
+                localStorage.setItem('email', $('#email').val());
+            });
+
+            $('#btn_show').click(function(){
+                console.log('btn_show');
+                var name = localStorage.getItem('name');
+                var email = localStorage.getItem('email');
+
+                alert('name is ' + name + '\nEmail is ' + email);
+            });
+        });
+    </script>
+</head>
+<body>
+<input type="text" id="name" placeholder="Name..."/>
+<input type="text" id="email" placeholder="Email..."/>
+<button id="btn">Store Data</button>
+<button id="btn_show">Show Stored Data</button>
+</body>
+</html>

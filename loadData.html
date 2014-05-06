@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="data.js"></script>
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/modernizr/modernizr.js"></script>
+    <script>
+        console.log(data[0]);
+        $(function(){
+            $('#btn').click(function(){
+                var key = generateUUID();
+                console.log(key);
+                localStorage.setItem('data', JSON.stringify(data));
+                 data.forEach(function(county){
+                     localStorage.setItem(county.name, JSON.stringify(county))
+                 });
+
+
+
+                //console.log(localStorage.getItem('data'));
+            });
+        });
+
+        function generateUUID() {
+            var d = new Date().getTime();
+            var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                var r = (d + Math.random()*16)%16 | 0;
+                d = Math.floor(d/16);
+                return (c=='x' ? r : (r&0x7|0x8)).toString(16);
+            });
+            return uuid;
+        }
+    </script>
+</head>
+<body>
+<button id="btn">Store California Information</button>
+</body>
+</html>

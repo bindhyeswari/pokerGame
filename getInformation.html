@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        input{
+            font: 100 1em Avenir;
+            padding: 0.2em 0.5em;
+            margin: 1em;
+            border:1px solid gray ;
+        }
+    </style>
+    <script src="data.js"></script>
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/modernizr/modernizr.js"></script>
+    <script>
+        $(function(){
+
+            var arr = JSON.parse(localStorage.getItem('data'));
+            //console.log(arr);
+            var county_names = arr.map(function(county){
+                if (county.county_name)
+                    return county.county_name.toString().trim().toLowerCase();
+                else
+                    return '';
+            });
+
+            // print out all keys stored in localStorage
+            for(var i = 0; i < localStorage.length; i++) {
+                var key = localStorage.key(i);
+                console.log(localStorage.key(i));
+                console.log(localStorage.getItem(key));
+            }
+
+
+            //console.log(county_names);
+
+            $('#btn').click(function(){
+                var inp = $('#county_name').val();
+                inp = inp.trim().toLocaleLowerCase();
+                var index = county_names.indexOf(inp);
+                console.log(index);
+                var obj = arr[index];
+                console.log(obj);
+
+            });
+
+            $('#btn_item').click(function(){
+                var inp = $('#county_name').val();
+                console.log(localStorage.getItem('inp'));
+            });
+
+        });
+    </script>
+</head>
+<body>
+<input type="text" id="county_name"/>
+<button id="btn">Get County Information</button>
+<button id="btn_item">Get County Information By County Set Item</button>
+<div>
+    County information goes here...
+</div>
+</body>
+</html>
