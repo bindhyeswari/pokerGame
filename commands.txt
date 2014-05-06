@@ -1,0 +1,17 @@
+  501  pwd
+  502  cd img
+  503  curl http://upload.wikimedia.org/wikipedia/commons/6/62/03_of_spades.svg > 3spade.svg
+  504  cd ..
+  505  clear
+  506  ls
+  507  pwd
+  508  bower install jquery
+  509  curl http://upload.wikimedia.org/wikipedia/commons/thumb/8/87/01_of_clubs_01.svg/82px-01_of_clubs_01.svg.png > 82px-01_of_clubs_01.svg.png
+  510  clear
+  511  ls
+  512  mv scaper scraper
+  513  clear
+  514  ls
+  515  chmod 777 scraper
+  516  ./scraper
+  517  history > commands.txt
