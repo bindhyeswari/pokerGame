@@ -1,66 +1,63 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="pokerApp">
 <head lang="en">
     <meta charset="UTF-8">
     <title>Card Game</title>
+    <script src="index.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
     <script>
-        // Card game
-        // Card constructor
-        var suitDescrption = ['Hearts', 'Spades', 'Clubs', 'Diamonds'];
-        var valDescription = ['Ace', 2,3,4,5,6,7,8,9,10,'Jack', 'Queen', 'King'];
 
-        function Card(_suit, _value){
-            this.suit = _suit;
-            this.val = _value;
-            this.toString = function(){
-                return valDescription[this.val] + ' of ' + suitDescrption[this.suit];
-            }
-        }
+        // for using angular, I need a module, so Im creating it
+        var pokerApp = angular.module('pokerApp', []);
+        // two inputs - 1) name of the module, 2) dependencies / other modules that
+        // pokerApp needs to work with
 
-        function Deck(){
-            this.cards = [];
-            this.shuffle = function(){
-                for(var i = 0, len = this.cards.length; i < len; i++){
-                    var index = Math.floor(Math.random() * len);
-                    var temp = this.cards[i];
-                    this.cards[i] = this.cards[index];
-                    this.cards[index] = temp;
-                }
-            };
-            this.deal = function(){
+        // MVC - Model View Controller
+        // Model - information
+        // View - what is shown to the user
+        // Controller - To have business logic
 
-            };
-            this.toString = function(){
-                //console.log(this.cards);
-                return this.cards.map(function(elem){
+        // Controllers are defined on modules by using the .controller() method
+        // This method takes two inputs
+        // 1) Name of the controller
+        // 2) A function that defines the controller
+        // The function in turn takes a special object called $scope
 
-                    return elem.toString();
-                });
-            };
-            this.init = function(){
-                this.cards = [];
-                for (var i = 0; i < 4; i++){
-                    for (var j = 0; j < 13; j++){
-                        var card = new Card(i, j);
-                        this.cards.push(card);
-                    }
-                }
-            }
-        }
+        pokerApp.controller('PokerCtrl', function($scope){
+            // All model information goes into the $scope object as properties
+            $scope.type_of_game = 'This is a poker game...';
+            $scope.table = table;
+            $scope.deck = deck;
+        });
 
-        var deck = new Deck();
-        console.log(deck.cards.length);
-        deck.init();
-        console.log(deck.toString());
-        deck.shuffle();
-        console.log(deck.toString());
 
-        console.log('asdf'.substr(1,2));
-        console.log('asdf'.substring(1,2));
 
     </script>
 </head>
 <body>
+
+    <div ng-controller="PokerCtrl">
+        <div>
+            <!--This div shows the type of the game-->
+            {{type_of_game}}
+        </div>
+        <div class="players">
+            <div ng-repeat="player in table.players">
+                {{player.name}}
+                <ul class="players_cards">
+                    <li ng-repeat="card in player.cards">
+                        {{card.toString() + ' ,imgString: ' + card.toImgString()}}
+                        <img ng-src="{{'img/' + card.toImgString()}}"/>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="deck">
+            <div ng-repeat="card in deck.cards">
+                {{card.toString()}}
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>
